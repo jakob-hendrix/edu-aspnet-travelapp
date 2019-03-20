@@ -60,6 +60,8 @@ namespace AspTravelerApp
             //app.UseDefaultFiles();
             app.UseStaticFiles();
 
+            SampleData.InitializeData(app.ApplicationServices);
+
             // Throw an exception if nothing handles the request
             app.Run(context => {
                 throw new Exception("Not implemented yet");

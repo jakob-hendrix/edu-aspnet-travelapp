@@ -15,8 +15,9 @@ namespace AspTravelerApp.Models
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
 
-        [ForeignKey("TripId")]
-        public Trip TripID { get; set; }
+        public int TripID { get; set; }
+        [ForeignKey("TripID")]
+        public Trip Trip { get; set; }
 
         [Required]
         public DateTime StartDate { get; set; }

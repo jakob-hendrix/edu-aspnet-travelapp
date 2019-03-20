@@ -36,13 +36,13 @@ namespace AspTravelerApp.Migrations
 
                     b.Property<DateTime>("StartDate");
 
-                    b.Property<int?>("TripId");
+                    b.Property<int>("TripID");
 
                     b.Property<int>("Type");
 
                     b.HasKey("ID");
 
-                    b.HasIndex("TripId");
+                    b.HasIndex("TripID");
 
                     b.ToTable("Segments");
                 });
@@ -68,9 +68,10 @@ namespace AspTravelerApp.Migrations
 
             modelBuilder.Entity("AspTravelerApp.Models.Segment", b =>
                 {
-                    b.HasOne("AspTravelerApp.Models.Trip", "TripID")
+                    b.HasOne("AspTravelerApp.Models.Trip", "Trip")
                         .WithMany("Segments")
-                        .HasForeignKey("TripId");
+                        .HasForeignKey("TripID")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }
