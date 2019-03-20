@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -9,6 +10,11 @@ namespace AspTravelerApp.Models
     /// </summary>
     public class Trip
     {
+        public Trip()
+        {
+            Segments = new List<Segment>();
+        }
+
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
         [Required]
@@ -16,5 +22,7 @@ namespace AspTravelerApp.Models
         public string Description { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
+
+        public List<Segment> Segments { get; set; }
     }
 }

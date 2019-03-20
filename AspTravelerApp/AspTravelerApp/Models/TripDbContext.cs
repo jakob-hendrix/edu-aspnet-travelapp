@@ -10,5 +10,6 @@ namespace AspTravelerApp.Models
         }
 
         public DbSet<Trip> Trips { get; set; }
+        public DbSet<Segment> Segments { get; set; }
     }
 }
