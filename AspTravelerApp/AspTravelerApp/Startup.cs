@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Collections.Generic;
 
 namespace AspTravelerApp
 {
@@ -48,25 +49,38 @@ namespace AspTravelerApp
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            loggerFactory.AddConsole();
+            loggerFactory.AddConsole(LogLevel.Information);
 
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseExceptionHandler("/error.html");
-            }
+            app.UseExceptionHandler("/error.html");
+            //if (env.IsDevelopment())
+            //{
+            //    app.UseDeveloperExceptionPage();
+            //}
+            //else
+            //{
+            //    app.UseExceptionHandler("/error.html");
+            //}
 
-            //app.UseDefaultFiles();
+            app.UseDefaultFiles(new DefaultFilesOptions
+            {
+                DefaultFileNames = new List<string> { "index.html", "defaultFile.html" }
+            });
+
             app.UseStaticFiles();
-
-            SampleData.InitializeData(app.ApplicationServices);
 
             // Throw an exception if nothing handles the request
             app.Run(context => {
                 throw new Exception("Not implemented yet");
+            });
+
+            SampleData.InitializeData(app.ApplicationServices);
+
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{id?}"
+                );
             });
         }
     }
