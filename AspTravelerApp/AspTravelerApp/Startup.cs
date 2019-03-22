@@ -1,9 +1,8 @@
-﻿using AspTravelerApp.Models;
+﻿using AspTravelerApp.Data;
+using AspTravelerApp.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Sqlite;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -29,16 +28,19 @@ namespace AspTravelerApp
 
             Configuration = builder.Build();
         }
-        public IConfiguration Configuration { get; set; }
+        public IConfigurationRoot Configuration { get; private set; }
 
 
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<TripDbContext>(options => 
-                options.UseSqlite(Configuration.GetConnectionString("DefaultConnection"))
-            );
+            var connectionString = Configuration.GetConnectionString("DefaultConnection");
+
+            services.AddScoped<TripRepository>();
+            services.AddDbContext<TripDbContext>(options => {
+                options.UseSqlite(connectionString);
+            });
 
             services.AddMvc();
         }

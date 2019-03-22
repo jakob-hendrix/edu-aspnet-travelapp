@@ -1,19 +1,16 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using AspTravelerApp.Models;
+using AspTravelerApp.Services;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace AspTravelerApp.Models
+namespace AspTravelerApp.Data
 {
     public class SampleData
     {
         public static void InitializeData(IServiceProvider provider)
         {
-            var serviceScope = provider.GetRequiredService<IServiceScopeFactory>()
-                                       .CreateScope();
-            using (serviceScope)
+            using (var serviceScope = provider.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
                 var env = serviceScope.ServiceProvider
                                       .GetService<IHostingEnvironment>();
@@ -21,10 +18,11 @@ namespace AspTravelerApp.Models
                 // Only add fake data for dev purposes
                 if (!env.IsDevelopment()) return;
 
-                var db = serviceScope.ServiceProvider.GetService<TripRepository>();
+                var db = serviceScope.ServiceProvider
+                                     .GetService<TripRepository>();
 
                 // Abort mocking if we have any current data at all
-                if (db.Get().Any()) return;
+//                if (db.Get().Any()) return;
 
                 // Mock up a trip!
                 var startDate = FirstFridayNextMonth(DateTime.Today);

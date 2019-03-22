@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace AspTravelerApp.Migrations
 {
-    public partial class Newtablestructure : Migration
+    public partial class Initnewnamespaces : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

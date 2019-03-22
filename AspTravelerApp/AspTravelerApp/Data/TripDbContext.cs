@@ -1,10 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AspTravelerApp.Models;
+using Microsoft.EntityFrameworkCore;
 
-namespace AspTravelerApp.Models
+namespace AspTravelerApp.Data
 {
     public class TripDbContext : DbContext
     {
-        public TripDbContext(DbContextOptions < TripDbContext > options) : base(options)
+        public TripDbContext(DbContextOptions<TripDbContext> options) : base(options)
         {
             Database.EnsureCreatedAsync().Wait();
         }
