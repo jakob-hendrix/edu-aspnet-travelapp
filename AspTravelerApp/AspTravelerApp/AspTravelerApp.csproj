@@ -12,10 +12,6 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.1.8" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
   </ItemGroup>
-  
-  <ItemGroup>
-    <Folder Include="Views\" />
-  </ItemGroup>
 
   <Target Name="TestScript" BeforeTargets="Build">
     <Exec Command="echo 'Hello. We are starting the build process.'" />

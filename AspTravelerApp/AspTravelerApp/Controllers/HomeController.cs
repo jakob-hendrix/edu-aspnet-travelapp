@@ -13,12 +13,11 @@ namespace AspTravelerApp.Controllers
         {
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
+        public IActionResult Index() => View();
 
-        public IActionResult FAQ()
+        public IActionResult About() => View();
+
+        public IActionResult Faq()
         {
             var faq = new Tuple<string, string>(
                 "Why did the chicken cross the road?",
@@ -26,5 +25,7 @@ namespace AspTravelerApp.Controllers
             );
             return View(faq);
         }
+
+        public IActionResult Error => View();
     }
 }

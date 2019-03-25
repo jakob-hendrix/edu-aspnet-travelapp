@@ -9,13 +9,12 @@ namespace AspTravelerApp.Controllers
         {
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
+        public IActionResult Index() => View();
+        
 
         public IActionResult Test()
         {
+
             var trips = new Models.Trip[]
             {
                 new Models.Trip { Name = "Vacation 1" },
@@ -23,5 +22,7 @@ namespace AspTravelerApp.Controllers
             };
             return Json(trips);
         }
+
+        public IActionResult Search() => View();
     }
 }

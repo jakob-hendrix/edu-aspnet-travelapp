@@ -1,0 +1,24 @@
+﻿@model IEnumerable<AspTravelerApp.Models.Trip>
+@{
+    ViewData["Title"] = "Search";
+}
+
+<h1>Search for Trips</h1>
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+    </tr>
+    @foreach (var trip in Model)
+    {
+    <tr>
+        <td>@trip.Name</td>
+        <td>@trip.Description</td>
+        <td>@trip.StartDate.ToString("d")</td>
+        <td>@trip.EndDate.ToString("d")</td>
+    </tr>
+    }
+</table>
+

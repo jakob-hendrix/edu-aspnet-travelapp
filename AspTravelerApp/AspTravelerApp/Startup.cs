@@ -61,11 +61,6 @@ namespace AspTravelerApp
             //    app.UseExceptionHandler("/error.html");
             //}
 
-            app.UseDefaultFiles(new DefaultFilesOptions
-            {
-                DefaultFileNames = new List<string> { "index.html", "defaultFile.html" }
-            });
-
             app.UseStaticFiles();
 
             //// Throw an exception if nothing handles the request
