@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@{ 
+    var daysUntil = 365 - DateTime.Now.DayOfYear;
+}
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -41,6 +44,7 @@
         <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - ASPTravelerApp</p>
+            <span style="font-weight:bold" ;>There are only @daysUntil days left in @DateTime.Now.Year</span>
         </footer>
     </div>
 

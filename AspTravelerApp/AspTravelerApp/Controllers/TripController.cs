@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AspTravelerApp.Data;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 namespace AspTravelerApp.Controllers
 {
     public class TripController : BaseController
     {
+        private TripDbContext db = new TripDbContext();
+
         public TripController(ILoggerFactory loggerFactory) : base(loggerFactory)
         {
         }
