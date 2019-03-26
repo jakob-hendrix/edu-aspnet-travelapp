@@ -16,8 +16,7 @@ namespace AspTravelerApp.Services
 
         public IEnumerable<Trip> Get()
         {
-            return _context.Trips
-                           .ToList();
+            return _context.Trips.ToList();
         }
         public Trip GetById(int id)
         {

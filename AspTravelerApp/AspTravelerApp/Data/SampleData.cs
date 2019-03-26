@@ -2,14 +2,19 @@
 using AspTravelerApp.Services;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace AspTravelerApp.Data
 {
     public class SampleData
     {
-        public static void InitializeData(IServiceProvider provider)
+        public static void InitializeData(IServiceProvider provider, ILoggerFactory loggerFactory)
         {
+            var logger = loggerFactory.CreateLogger("InitializeData");
+
             using (var serviceScope = provider.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
                 var env = serviceScope.ServiceProvider
@@ -18,12 +23,15 @@ namespace AspTravelerApp.Data
                 // Only add fake data for dev purposes
                 if (!env.IsDevelopment()) return;
 
-                var db = serviceScope.ServiceProvider
-                                     .GetService<TripRepository>();
+                var db = serviceScope.ServiceProvider.GetService<TripRepository>();
 
-                // Abort mocking if we have any current data at all
-//                if (db.Get().Any()) return;
+                if (db.Get().Any())
+                {
+                    logger.LogDebug("Data exists in DB. Not adding seeder data.");
+                    return;
+                }
 
+                logger.LogDebug("Adding initial data to our db for testing");
                 // Mock up a trip!
                 var startDate = FirstFridayNextMonth(DateTime.Today);
                 var endDate = startDate.AddDays(2);
@@ -75,6 +83,7 @@ namespace AspTravelerApp.Data
                 newTrip.Segments.Add(trainReturn);
 
                 db.Add(newTrip);
+                logger.LogDebug("DB updated with initial data");
             }
         }
 
